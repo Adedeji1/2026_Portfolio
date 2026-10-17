@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { ArrowUpRight, Download, Mail, MapPin, Briefcase } from "lucide-react";
+import { ArrowUpRight, Download, Mail, MapPin, Briefcase, Code2, User, FolderGit2, Wrench, Send } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Socials } from "@/components/socials";
 import { ContactForm } from "@/components/contact-form";
+import { Badge } from "@/components/badge";
 import { BrandIcon, TechIcon } from "@/components/icons";
 import { principles, projects, skills } from "@/data/content";
 import { portraitSrc, resumeHref, site } from "@/data/site";
@@ -31,8 +32,8 @@ const jsonLd = {
 
 const jsonLdString = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
 
-const eyebrow = "text-sm font-medium text-accent";
-const h2 = "mt-2 font-serif text-3xl font-semibold sm:text-4xl";
+const h2 = "mt-4 font-serif text-3xl font-semibold sm:text-4xl";
+const badgeIcon = "size-3.5";
 
 export default function Home() {
   return (
@@ -43,8 +44,8 @@ export default function Home() {
         {/* Hero */}
         <section id="home" className="container-x grid items-center gap-10 py-14 sm:py-20 md:grid-cols-[1.15fr_1fr]">
           <div>
-            <p className={eyebrow}>Frontend Developer</p>
-            <h1 className="mt-4 text-4xl font-semibold leading-[1.1] sm:text-6xl">
+            <Badge icon={<Code2 className={badgeIcon} aria-hidden="true" />}>Frontend Developer</Badge>
+            <h1 className="mt-5 text-4xl font-semibold leading-[1.1] sm:text-6xl">
               <span className="text-accent">Afolabi Adedeji</span>
             </h1>
             <p className="mt-4 text-2xl font-semibold sm:text-4xl">
@@ -99,7 +100,7 @@ export default function Home() {
         <section id="about" className="border-t border-line">
           <div className="container-x grid gap-10 py-16 md:grid-cols-[1.2fr_1fr] md:py-20">
             <div>
-              <p className={eyebrow}>About</p>
+              <Badge icon={<User className={badgeIcon} aria-hidden="true" />}>About</Badge>
               <h2 className={h2}>Web experiences that solve real problems.</h2>
               <p className="mt-5 max-w-xl leading-relaxed text-muted">
                 I&rsquo;m Afolabi Adedeji, a frontend developer with over two years of experience creating and
@@ -122,7 +123,7 @@ export default function Home() {
         {/* Projects */}
         <section id="projects" className="border-t border-line">
           <div className="container-x py-16 md:py-20">
-            <p className={eyebrow}>Projects</p>
+            <Badge icon={<FolderGit2 className={badgeIcon} aria-hidden="true" />}>Projects</Badge>
             <h2 className={h2}>Selected work</h2>
             <ul className="mt-10 grid gap-6 md:grid-cols-2">
               {projects.map((p) => (
@@ -151,7 +152,9 @@ export default function Home() {
                       <p className="mt-2 text-sm leading-relaxed text-muted">{p.description}</p>
                       <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
                         {p.tags.map((t) => (
-                          <li key={t} className="rounded bg-accent-soft px-2 py-1 text-xs font-medium text-accent">{t}</li>
+                          <li key={t}>
+                            <Badge size="sm">{t}</Badge>
+                          </li>
                         ))}
                       </ul>
                       {(p.demo || p.repo) && (
@@ -179,7 +182,7 @@ export default function Home() {
         {/* Skills */}
         <section id="skills" className="border-t border-line">
           <div className="container-x py-16 md:py-20">
-            <p className={eyebrow}>Skills</p>
+            <Badge icon={<Wrench className={badgeIcon} aria-hidden="true" />}>Skills</Badge>
             <h2 className={h2}>Technologies I work with</h2>
             <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
               {skills.map((s) => (
@@ -196,7 +199,7 @@ export default function Home() {
         <section id="contact" className="border-t border-line">
           <div className="container-x grid gap-10 py-16 md:grid-cols-2 md:py-20">
             <div>
-              <p className={eyebrow}>Contact</p>
+              <Badge icon={<Send className={badgeIcon} aria-hidden="true" />}>Contact</Badge>
               <h2 className={h2}>Let&rsquo;s work together.</h2>
               <p className="mt-5 max-w-md leading-relaxed text-muted">
                 I&rsquo;m open to new opportunities, collaborations, or just a friendly chat. Feel free to reach out.
