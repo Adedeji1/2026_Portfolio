@@ -19,6 +19,5 @@ export const site = {
 
 const exists = (file: string) => fs.existsSync(path.join(process.cwd(), "public", file));
 
-// Drop your files into /public with these exact names; the UI switches over automatically.
 export const resumeHref = exists("resume.pdf") ? "/resume.pdf" : null;
 export const portraitSrc = exists("portrait.jpg") ? "/portrait.jpg" : null;
