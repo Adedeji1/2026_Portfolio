@@ -32,8 +32,21 @@ export const projects: Project[] = [
   },
   {
     title: "Movie Recommendation App",
-    description: "A movie discovery application built with Next.js and the TMDB API.",
+    description: "Search and explore movies from TMDB, with a wishlist to track what you want to watch.",
     tags: ["Next.js", "TMDB API", "Tailwind CSS"],
+    image: "/project/moviebox.png",
+  },
+  {
+    title: "YPL Pizza",
+    description: "Website for a Florida pizza business, taking the brands Figma design to a live, deployed site.",
+    tags: ["Figma", "TypeScript", "Tailwind CSS"],
+    image: "/project/image.png"
+  },
+  {
+    title: "Consulting Firm",
+    description: "Responsive website for a consulting firm, presenting its services and generating client enquiries.",
+    tags: [ "React", "TypeScript", "Tailwind CSS"],
+    image: "/project/Ade-Consult.png",
   },
 ];
 
