@@ -1,14 +1,15 @@
 import Image from "next/image";
-import { ArrowUpRight, Download, Mail, MapPin, Briefcase } from "lucide-react";
+import { ArrowUpRight, Download, Mail, MapPin, Briefcase, Code2, User, FolderGit2, Wrench, Send } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Socials } from "@/components/socials";
 import { ContactForm } from "@/components/contact-form";
+import { Badge } from "@/components/badge";
 import { BrandIcon, TechIcon } from "@/components/icons";
 import { principles, projects, skills } from "@/data/content";
 import { portraitSrc, resumeHref, site } from "@/data/site";
 
-const formEnabled = Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_TO_EMAIL);
+const [addressLocality, addressCountry] = site.location.split(",").map((s) => s.trim());
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -19,7 +20,7 @@ const jsonLd = {
       jobTitle: "Frontend Developer",
       url: site.url,
       email: `mailto:${site.email}`,
-      address: { "@type": "PostalAddress", addressLocality: "Lagos", addressCountry: "NG" },
+      address: { "@type": "PostalAddress", addressLocality, addressCountry: addressCountry === "Nigeria" ? "NG" : addressCountry },
       knowsAbout: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"],
       sameAs: Object.values(site.socials).filter(Boolean),
     },
@@ -27,24 +28,27 @@ const jsonLd = {
   ],
 };
 
-const eyebrow = "text-sm font-medium text-accent";
-const h2 = "mt-2 font-serif text-3xl font-semibold sm:text-4xl";
+const jsonLdString = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
+
+const h2 = "mt-4 font-serif text-3xl font-semibold sm:text-4xl";
+const badgeIcon = "size-3.5";
 
 export default function Home() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString }} />
       <Header resumeHref={resumeHref} />
       <main>
         {/* Hero */}
         <section id="home" className="container-x grid items-center gap-10 py-14 sm:py-20 md:grid-cols-[1.15fr_1fr]">
           <div>
-            <p className={eyebrow}>Frontend Developer</p>
-            <h1 className="mt-4 text-4xl font-semibold leading-[1.1] sm:text-6xl">
-              <span className="text-accent">Afolabi Adedeji</span> 
+            <Badge icon={<Code2 className={badgeIcon} aria-hidden="true" />}>Frontend Developer</Badge>
+            <h1 className="mt-5 text-4xl font-semibold leading-[1.1] sm:text-6xl">
+              <span className="text-accent">Afolabi Adedeji</span>
             </h1>
-              <h2 className="text-2xl font-semibold sm:text-4xl">Engineering interfaces that look exceptional and work flawlessly.</h2>
-            
+            <p className="mt-4 text-2xl font-semibold sm:text-4xl">
+              Engineering interfaces that look exceptional and work flawlessly.
+            </p>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
               A frontend developer with 2+ years of experience building scalable, user-friendly web
               applications with React, Next.js and TypeScript.
@@ -62,7 +66,7 @@ export default function Home() {
             <Socials className="mt-8" />
           </div>
 
-          <div className="relative mx-auto w-full max-w-sm md:max-w-none">
+          <div className="relative mx-auto mb-6 w-full max-w-sm md:mb-0 md:max-w-none">
             <div className="aspect-[4/5] overflow-hidden rounded-xl border border-line bg-accent-soft">
               {portraitSrc ? (
                 <Image
@@ -94,7 +98,7 @@ export default function Home() {
         <section id="about" className="border-t border-line">
           <div className="container-x grid gap-10 py-16 md:grid-cols-[1.2fr_1fr] md:py-20">
             <div>
-              <p className={eyebrow}>About</p>
+              <Badge icon={<User className={badgeIcon} aria-hidden="true" />}>About</Badge>
               <h2 className={h2}>Web experiences that solve real problems.</h2>
               <p className="mt-5 max-w-xl leading-relaxed text-muted">
                 I&rsquo;m Afolabi Adedeji, a frontend developer with over two years of experience creating and
@@ -117,21 +121,22 @@ export default function Home() {
         {/* Projects */}
         <section id="projects" className="border-t border-line">
           <div className="container-x py-16 md:py-20">
-            <p className={eyebrow}>Projects</p>
+            <Badge icon={<FolderGit2 className={badgeIcon} aria-hidden="true" />}>Projects</Badge>
             <h2 className={h2}>Selected work</h2>
             <ul className="mt-10 grid gap-6 md:grid-cols-2">
               {projects.map((p) => (
                 <li key={p.title}>
                   <article className="flex h-full flex-col overflow-hidden rounded-lg border border-line bg-surface">
-                    <div className="aspect-[16/10] border-b border-line bg-accent-soft">
+                    <div className={`border-b border-line bg-accent-soft ${p.image ? "" : "aspect-[16/10]"}`}>
                       {p.image ? (
                         <Image
                           src={p.image}
-                          alt={`Screenshot of ${p.Jolo_Portfolio.gif}`}
+                          alt={`Demo of ${p.title}`}
                           width={1280}
                           height={800}
                           sizes="(min-width: 768px) 50vw, 100vw"
-                          className="size-full object-cover object-top"
+                          unoptimized={p.image.endsWith(".gif")}
+                          className="h-auto w-full"
                         />
                       ) : (
                         <div className="grid size-full place-items-center px-6 text-center text-sm text-muted">
@@ -145,7 +150,9 @@ export default function Home() {
                       <p className="mt-2 text-sm leading-relaxed text-muted">{p.description}</p>
                       <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
                         {p.tags.map((t) => (
-                          <li key={t} className="rounded bg-accent-soft px-2 py-1 text-xs font-medium text-accent">{t}</li>
+                          <li key={t}>
+                            <Badge size="sm">{t}</Badge>
+                          </li>
                         ))}
                       </ul>
                       {(p.demo || p.repo) && (
@@ -173,7 +180,7 @@ export default function Home() {
         {/* Skills */}
         <section id="skills" className="border-t border-line">
           <div className="container-x py-16 md:py-20">
-            <p className={eyebrow}>Skills</p>
+            <Badge icon={<Wrench className={badgeIcon} aria-hidden="true" />}>Skills</Badge>
             <h2 className={h2}>Technologies I work with</h2>
             <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
               {skills.map((s) => (
@@ -190,7 +197,7 @@ export default function Home() {
         <section id="contact" className="border-t border-line">
           <div className="container-x grid gap-10 py-16 md:grid-cols-2 md:py-20">
             <div>
-              <p className={eyebrow}>Contact</p>
+              <Badge icon={<Send className={badgeIcon} aria-hidden="true" />}>Contact</Badge>
               <h2 className={h2}>Let&rsquo;s work together.</h2>
               <p className="mt-5 max-w-md leading-relaxed text-muted">
                 I&rsquo;m open to new opportunities, collaborations, or just a friendly chat. Feel free to reach out.
@@ -221,17 +228,7 @@ export default function Home() {
               <Socials className="mt-8" />
             </div>
 
-            {formEnabled ? (
-              <ContactForm />
-            ) : (
-              <div className="self-start rounded-lg border border-line bg-surface p-6">
-                <h3 className="font-sans text-base font-semibold">Send a message</h3>
-                <p className="mt-2 text-sm text-muted">The contact form is not configured yet, so email works best.</p>
-                <a href={`mailto:${site.email}`} className="btn-primary mt-5">
-                  Email me <ArrowUpRight className="size-4" aria-hidden="true" />
-                </a>
-              </div>
-            )}
+            <ContactForm />
           </div>
         </section>
       </main>

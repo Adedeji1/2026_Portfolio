@@ -1,7 +1,4 @@
-import {
-  siReact, siNextdotjs, siTypescript, siJavascript, siTailwindcss,
-  siHtml5, siCss, siGit, siReactquery, siFigma,
-} from "simple-icons";
+import { siReact, siNextdotjs, siTypescript, siJavascript, siTailwindcss, siHtml5, siCss, siGit, siReactquery, siFigma,} from "simple-icons";
 
 export const skills = [
   { name: "Next.js", icon: siNextdotjs, mono: true },
@@ -20,23 +17,36 @@ export type Project = {
   title: string;
   description: string;
   tags: string[];
-  image?: string; // e.g. "/projects/jolojolo.png" (put the file in /public/projects)
+  image?: string;
   demo?: string;
   repo?: string;
 };
 
-// Only details already confirmed in the approved mockup. Add `image`, `demo` and `repo` as they become available.
 export const projects: Project[] = [
   {
-    title: "Jolojolo Admin Dashboard",
+    title: "Admin Dashboard",
     description:
       "An admin dashboard for managing deliveries, campaigns and team operations.",
-    tags: ["Tan Stack Query", "TypeScript", "Tailwind CSS"],
+    tags: ["TanStack Query", "TypeScript", "Tailwind CSS"],
+    image: "/project/Jolo_Portfolio.gif",
   },
   {
     title: "Movie Recommendation App",
-    description: "A movie discovery application built with Next.js and the TMDB API.",
+    description: "Search and explore movies from TMDB, with a wishlist to track what you want to watch.",
     tags: ["Next.js", "TMDB API", "Tailwind CSS"],
+    image: "/project/moviebox.png",
+  },
+  {
+    title: "YPL Pizza",
+    description: "Website for a Florida pizza business, taking the brands Figma design to a live, deployed site.",
+    tags: ["Figma", "TypeScript", "Tailwind CSS"],
+    image: "/project/image.png"
+  },
+  {
+    title: "Consulting Firm",
+    description: "Responsive website for a consulting firm, presenting its services and generating client enquiries.",
+    tags: [ "React", "TypeScript", "Tailwind CSS"],
+    image: "/project/Ade-Consult.png",
   },
 ];
 
