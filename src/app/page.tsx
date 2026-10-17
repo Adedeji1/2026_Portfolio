@@ -132,10 +132,11 @@
 //                       {p.image ? (
 //                         <Image
 //                           src={p.image}
-//                           alt={`Screenshot of ${p.title}`}
+//                           alt={`Demo of ${p.title}`}
 //                           width={1280}
 //                           height={800}
 //                           sizes="(min-width: 768px) 50vw, 100vw"
+//                           unoptimized={p.image.endsWith(".gif")}
 //                           className="size-full object-cover object-top"
 //                         />
 //                       ) : (
@@ -377,7 +378,7 @@ export default function Home() {
               {projects.map((p) => (
                 <li key={p.title}>
                   <article className="flex h-full flex-col overflow-hidden rounded-lg border border-line bg-surface">
-                    <div className="aspect-[16/10] border-b border-line bg-accent-soft">
+                    <div className={`border-b border-line bg-accent-soft ${p.image ? "" : "aspect-[16/10]"}`}>
                       {p.image ? (
                         <Image
                           src={p.image}
@@ -386,7 +387,7 @@ export default function Home() {
                           height={800}
                           sizes="(min-width: 768px) 50vw, 100vw"
                           unoptimized={p.image.endsWith(".gif")}
-                          className="size-full object-cover object-top"
+                          className="h-auto w-full"
                         />
                       ) : (
                         <div className="grid size-full place-items-center px-6 text-center text-sm text-muted">

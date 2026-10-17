@@ -28,7 +28,7 @@ export const projects: Project[] = [
     description:
       "An admin dashboard for managing deliveries, campaigns and team operations.",
     tags: ["TanStack Query", "TypeScript", "Tailwind CSS"],
-    image: "/public/project/Jolo_Portfolio.gif",
+    image: "/project/Jolo_Portfolio.gif",
   },
   {
     title: "Movie Recommendation App",
