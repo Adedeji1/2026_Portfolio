@@ -1,7 +1,4 @@
-import {
-  siReact, siNextdotjs, siTypescript, siJavascript, siTailwindcss,
-  siHtml5, siCss, siGit, siReactquery, siFigma,
-} from "simple-icons";
+import { siReact, siNextdotjs, siTypescript, siJavascript, siTailwindcss, siHtml5, siCss, siGit, siReactquery, siFigma,} from "simple-icons";
 
 export const skills = [
   { name: "Next.js", icon: siNextdotjs, mono: true },
@@ -20,18 +17,18 @@ export type Project = {
   title: string;
   description: string;
   tags: string[];
-  image?: string; // e.g. "/projects/jolojolo.png" (put the file in /public/projects)
+  image?: string;
   demo?: string;
   repo?: string;
 };
 
-// Only details already confirmed in the approved mockup. Add `image`, `demo` and `repo` as they become available.
 export const projects: Project[] = [
   {
     title: "Jolojolo Admin Dashboard",
     description:
       "An admin dashboard for managing deliveries, campaigns and team operations.",
-    tags: ["Tan Stack Query", "TypeScript", "Tailwind CSS"],
+    tags: ["TanStack Query", "TypeScript", "Tailwind CSS"],
+    image: "/public/project/Jolo_Portfolio.gif",
   },
   {
     title: "Movie Recommendation App",
