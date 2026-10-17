@@ -24,7 +24,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Jolojolo Admin Dashboard",
+    title: "Admin Dashboard",
     description:
       "An admin dashboard for managing deliveries, campaigns and team operations.",
     tags: ["TanStack Query", "TypeScript", "Tailwind CSS"],
