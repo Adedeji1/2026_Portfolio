@@ -9,8 +9,6 @@ import { BrandIcon, TechIcon } from "@/components/icons";
 import { principles, projects, skills } from "@/data/content";
 import { portraitSrc, resumeHref, site } from "@/data/site";
 
-const formEnabled = Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_TO_EMAIL);
-
 const [addressLocality, addressCountry] = site.location.split(",").map((s) => s.trim());
 
 const jsonLd = {
@@ -230,17 +228,7 @@ export default function Home() {
               <Socials className="mt-8" />
             </div>
 
-            {formEnabled ? (
-              <ContactForm />
-            ) : (
-              <div className="self-start rounded-lg border border-line bg-surface p-6">
-                <h3 className="font-sans text-base font-semibold">Send a message</h3>
-                <p className="mt-2 text-sm text-muted">The contact form is not configured yet, so email works best.</p>
-                <a href={`mailto:${site.email}`} className="btn-primary mt-5">
-                  Email me <ArrowUpRight className="size-4" aria-hidden="true" />
-                </a>
-              </div>
-            )}
+            <ContactForm />
           </div>
         </section>
       </main>

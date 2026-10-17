@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -14,13 +13,19 @@ export function ContactForm() {
     const form = e.currentTarget;
     setStatus("sending");
     try {
-      const res = await fetch("/api/contact", {
+      const values = {
+        ...Object.fromEntries(new FormData(form)),
+        _subject: "New message from your portfolio",
+        _template: "table",
+        _captcha: "false",
+      };
+      const res = await fetch("https://formsubmit.co/ajax/afolabiadedeji351@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(values),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error ?? "Message could not be sent.");
+      if (!res.ok || data.success === "false") throw new Error(data.message ?? "Message could not be sent.");
       form.reset();
       setStatus("sent");
     } catch (err) {
@@ -47,7 +52,7 @@ export function ContactForm() {
         <textarea name="message" required minLength={10} maxLength={4000} rows={5} className={field} placeholder="Tell me about your project or opportunity" />
       </label>
       {/* Honeypot: hidden from people, filled by bots */}
-      <input name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      <input name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <button type="submit" disabled={status === "sending"} className="btn-primary mt-5 w-full disabled:opacity-60">
         {status === "sending" ? "Sending…" : "Send message"} <ArrowUpRight className="size-4" aria-hidden="true" />
       </button>
