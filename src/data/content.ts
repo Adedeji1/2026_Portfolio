@@ -52,8 +52,8 @@ export const projects: Project[] = [
     description: "Responsive website for a consulting firm, presenting its services and generating client enquiries.",
     tags: [ "React", "TypeScript", "Tailwind CSS"],
     image: "/project/Ade-Consult.png",
-    demo: "",
-    repo: "",
+    demo: "https://ade-consult.vercel.app/",
+    repo: "https://github.com/Adedeji1/Ade-consult",
   },
 ];
 
