@@ -44,14 +44,16 @@ export const projects: Project[] = [
     description: "Website for a Florida pizza business, taking the brands Figma design to a live, deployed site.",
     tags: ["Figma", "TypeScript", "Tailwind CSS"],
     image: "/project/image.png",
-    demo: "",
-    repo: "",
+    demo: "https://ypl-fawn.vercel.app/",
+    repo: "https://github.com/Adedeji1/YPL",
   },
   {
     title: "Consulting Firm",
     description: "Responsive website for a consulting firm, presenting its services and generating client enquiries.",
     tags: [ "React", "TypeScript", "Tailwind CSS"],
     image: "/project/Ade-Consult.png",
+    demo: "",
+    repo: "",
   },
 ];
 
